@@ -1,0 +1,55 @@
+<header class="wrapper">
+    <div id="logo">
+        <img src="/src/assets/images/logo.png" alt="logo">
+    </div>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid nav-container">
+
+            <div class="navbar-header">
+                <button data-toggle="collapse" data-target="#main-nav" aria-expanded="false" class="navbar-toggle collapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="main-nav" aria-expanded="false" style="height: 0.8px;" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a [routerLink]="['/quizs']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">All Quizs</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/quizs', 0, 'edit']">Add Quiz</a>
+                    </li>
+                    <li routerLinkActive="active">
+                        <a [routerLink]="['/solvequiz', 1, 'take', 10]">Solve Quiz</a>
+                    </li>
+                    <!--<li><a [routerLink]="['/events/new']" routerLinkActive="active">Create Event</a></li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Events
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="">Angular Connect</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+           
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a [hidden]="!auth.isAuthenticated()" [routerLink]="['user/profile']">Welcome {{auth.currentUser?.firstName}}</a>
+                    </li>
+                    <li>
+                        <a [hidden]="auth.isAuthenticated()" [routerLink]="['user/login']">Login</a>
+                        <a [hidden]="!auth.isAuthenticated()" style="cursor: pointer" (click)="logout()">Logout</a>
+                    </li>
+                    
+                </ul>
+            </div>
+          </div>
+    </nav>
+</header>

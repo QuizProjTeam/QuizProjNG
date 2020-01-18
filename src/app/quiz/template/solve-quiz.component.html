@@ -1,0 +1,75 @@
+﻿<div class="carousel-container">
+    <div class="indicators">
+        <p>My Progress bar goes here...</p>
+        <ngbd-progressbar-showvalue [completedToPass] = "questionsAnswered" [totalToPass] ="questionsCount"></ngbd-progressbar-showvalue>
+        <div class="bb-custom-wrapper">
+            <div id="bb-bookblock" class="bb-bookblock">
+                <div class="bb-item" *ngFor="let question of questions; let i = index" >
+                    <article *ngIf="page == i + 1" >
+                        <h3 class="slide-title">{{question?.title}}</h3>
+                        <ol class="answers paper list-group">
+                            <li *ngFor="let answer of question?.answers; let i = index"
+                                class="answer list-group-item"
+                                [class.answered]="highlightAnswer[i]"
+                                (click)="selectAnswer(question, i)">
+                                <span [class.selected]="question.selectedAnswer === i">{{answer.text}}</span>
+                            </li>
+                        </ol>
+                    </article>
+                </div>
+            </div>
+            <!-- <nav>
+                <a id="bb-nav-first" href="#" class="bb-custom-icon">First page</a>
+                <a id="bb-nav-prev" href="#" class="bb-custom-icon">Previous</a>
+                <a id="bb-nav-next" href="#" class="bb-custom-icon">Next</a>
+                <a id="bb-nav-last" href="#" class="bb-custom-icon">Last page</a>
+              </nav> -->
+        </div> 
+        <!-- <div class="bb-custom-wrapper"> -->
+
+            <!-- <div id="bb-bookblock" class="bb-bookblock">
+              <div class="bb-item" *ngFor="let item of list">
+                <div class="bb-custom-firstpage">
+                  <h1>{{item}}</h1>
+                </div>
+                <div class="bb-custom-side">
+                  <p>Pastry bear claw oat cake danish croissant jujubes danish. Wypas soufflé muffin. Liquorice powder pastry
+                    danish. Candy toffee gummi bears chocolate bar lollipop applicake chocolate cake danish brownie.</p>
+                </div>
+              </div>
+            </div> -->
+            <ngb-pagination [collectionSize]="questions.length" [pageSize]="1" [(page)]="page" [maxSize]="7" (pageChange)="loadPage($event)">
+            </ngb-pagination>
+
+           
+            <!--<ngbd-pagination-basic></ngbd-pagination-basic>-->
+            <!--<uib-pagination class="questions-paging"
+            direction-links="false"
+            boundary-links="true"
+            items-per-page="ctrl.pager.pageSize"
+            total-items="ctrl.questionsCount"
+            max-size="7"
+            ng-model="ctrl.pager.currentPage"
+            ng-change="ctrl.flip(ctrl.pager.currentPage)"></uib-pagination>-->
+            <!--<div class="bb-custom-wrapper">
+        <div id="bb-blockbook" class="bb-bookblock">
+            <div class="bb-item" ng-repeat="question in ctrl.quiz.Questions">
+                <article class="quiz-question" ng-include="ctrl.questionTemplate"></article>
+            </div>
+        </div>-->
+            <div class="wrapper">
+                <button id="solve-quiz"
+                        *ngIf="progress() === 100"
+                        (click)="submit(quiz)"
+                        class="btn btn-lg btn-info col-md-offset-3 col-md-6">
+                    Submit Answers
+                </button>
+            </div>
+        </div>
+    
+</div>
+<article>
+    <div *ngIf="quizSolution">
+        <solution-area [solution]="quizSolution"></solution-area>
+    </div>
+</article>

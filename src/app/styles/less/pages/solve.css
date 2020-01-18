@@ -1,0 +1,105 @@
+﻿.absolute-center {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@font-face {
+  font-family: 'Droid Sans';
+  src: url('/src/assets/fonts/DroidSans.ttf');
+  src: url('/src/assets/fonts/DroidSans-Bold.ttf') format('bold');
+}
+@font-face {
+  font-family: 'Colaborate Thin';
+  src: url('/src/assets/fonts/ColabThi.otf');
+}
+.btn-grad {
+  background-color: #000000;
+  background-image: -webkit-linear-gradient(180deg, #323a43, #000000);
+  background-image: -moz-linear-gradient(180deg, #323a43, #000000);
+  background-image: -ms-linear-gradient(180deg, #323a43, #000000);
+  background-image: -o-linear-gradient(180deg, #323a43, #000000);
+  background-image: linear-gradient(180deg, #323a43, #000000);
+}
+.pageTextShadow {
+  text-shadow: 1px 1px 1px white;
+}
+.pageTitleShadow {
+  text-shadow: 1px 1px 1px black;
+}
+@keyframes neon-glow {
+  0% {
+    text-shadow: 0 0 0 #242f3c;
+  }
+  50% {
+    text-shadow: 0 0 3px #242f3c;
+  }
+  100% {
+    text-shadow: 0 0 0 #242f3c;
+  }
+}
+.container-fluid h1,
+.container-fluid h2 {
+  color: white;
+  text-shadow: 1px 1px 1px black;
+}
+.carousel-container {
+  position: relative;
+  font-family: "Colaborate Thin", monospace;
+}
+.carousel-container #solve-quiz {
+  z-index: 200;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 30%;
+  animation-name: fadeInDownBig;
+  animation-duration: 1s;
+  -webkit-box-shadow: 7px 10px 7px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 7px 10px 7px rgba(0, 0, 0, 0.7);
+  box-shadow: 7px 10px 7px rgba(0, 0, 0, 0.7);
+}
+.carousel-container .indicators {
+  position: relative;
+  height: 10rem;
+}
+.carousel-container .indicators .progress {
+  width: 70%;
+}
+.carousel-container .indicators .progress .progress-bar {
+  background-color: #323a43;
+}
+.carousel-container .indicators .questions-paging {
+  font-family: "Droid Sans", sans-serif;
+  margin: 0;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.carousel-container .indicators .questions-paging li {
+  float: left;
+}
+.carousel-container .indicators .questions-paging li a:first-child,
+.carousel-container .indicators .questions-paging li a:last-child {
+  border-radius: 4px;
+}
+.carousel-container .indicators .questions-paging .answered a {
+  color: white;
+  background-color: #1C232B;
+}
+@keyframes fadeInDownBig {
+  0% {
+    opacity: 0;
+    transform: translateY(-1000px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

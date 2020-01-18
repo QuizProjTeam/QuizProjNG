@@ -1,0 +1,16 @@
+<span class="glyphicon glyphicon-refresh glyphicon-spin spinner" *ngIf="loading"></span>
+<div>
+    <nav class="navbar navbar-default">
+        <nav-bar></nav-bar>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col-md-2">
+                <router-outlet name="popup"></router-outlet>
+            </div>
+        </div> 
+    </div>
+</div>

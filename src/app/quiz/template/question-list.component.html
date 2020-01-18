@@ -1,0 +1,39 @@
+﻿<!-- Questions -->
+<!--question.answers.length-->
+<div class="form-group" *ngIf="quiz && quiz.questions.length" >
+    <label class="col-lg-2 control-label">Questions</label>
+    <div class="col-lg-10">
+        <ul class="list-group question-list" name="questions">
+            <li class="list-group-item clearfix"
+                *ngFor="let question of quiz.questions; let i = index ">
+                <em class="text-info hide-overflow" [innerHTML]="question.title"
+                    (click)="openQuesitonMenu(question)"
+                    ngbPopover="There are {{question.answers.length}} answers in this question." triggers="mouseenter:mouseleave" popoverTitle="Question Hint">
+                ></em>
+                <span class="pull-right button-group">
+                    <button type="button"
+                            class="btn btn-xs btn-primary"
+                            (click)="openQuesitonMenu(question)">
+                        <span class="glyphicon glyphicon-edit"></span> Edit
+                    </button>
+                    <button type="button"
+                            class="btn btn-xs btn-danger"
+                            (click)="removeQuestion(i)">
+                        <span class="glyphicon glyphicon-remove"></span> Delete
+                    </button>
+                </span>
+            </li>
+        </ul>
+        <!-- Questions paging -->
+        <ngb-pagination class="pull-right" [collectionSize]="quiz.questions.length" [pageSize]="pageSize" [(page)]="page"
+                        [maxSize]="10" (pageChange)="loadPage($event)">
+        </ngb-pagination>
+
+        <!--<uib-pagination *ngIf="quiz.questions.length > ctrl.pager.pageSize"
+                        class="pull-right"
+                        total-items="quiz.questions.length"
+                        [(model)]="ctrl.pager.currentPage"
+                        items-per-page="ctrl.pager.pageSize"
+                        max-size="10"></uib-pagination>-->
+    </div>
+</div>

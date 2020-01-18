@@ -1,0 +1,97 @@
+<div class="panel-body">
+    <form class="form-horizontal"
+          novalidate>
+        <fieldset>
+            <legend>Quiz Search Tags</legend>
+            <!--<div class="form-group" 
+                    [ngClass]="{'has-error': (categoryVar.touched || 
+                                              categoryVar.dirty || quiz.id !== 0) && 
+                                              !categoryVar.valid }">
+                <label class="col-md-2 control-label" for="categoryId">Category</label>
+                <div class="col-md-8">
+                    <input class="form-control" 
+                           id="categoryId" 
+                           type="text"
+                           placeholder="Category (required)"
+                           required
+                          [(ngModel)]="quiz.categoryId"
+                           name="categoryId"
+                           #categoryVar="ngModel" />
+                    <span class="help-block" *ngIf="(categoryVar.touched ||
+                                                     categoryVar.dirty || quiz.id !== 0) &&
+                                                     categoryVar.errors">
+                        <span *ngIf="categoryVar.errors.required">
+                            A category must be entered.
+                        </span>
+                       
+                    </span>
+                </div>
+            </div>-->
+
+            <!-- Category -->
+            <div class="form-group">
+                <label for="categoryId" class="col-lg-2 control-label">Category</label>
+                <div class="col-lg-10">
+                    <input id="categoryName" type="text" class="form-control" name="categoryName"
+                           [(ngModel)]="quiz.category" 
+                           [ngbTypeahead]="search" 
+                           [resultFormatter]="formatter"
+                           [inputFormatter]="inputformatter"
+                           #categoryVar="ngModel"
+                           (selectItem)="selectedItem($event)"  />
+                    
+                    <span class="help-block" *ngIf="(categoryVar.touched ||
+                                                     categoryVar.dirty || quiz.id !== 0) &&
+                                                     categoryVar.errors">
+                        <span *ngIf="categoryVar.errors.required">
+                            A category must be entered.
+                        </span>
+                        
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (tagVar.touched || 
+                                              tagVar.dirty || quiz.id !== 0) && 
+                                              !tagVar.valid }">
+                <label class="col-md-2 control-label" for="tagsId">Search Tags</label>
+                <div class="col-md-8">
+                    <input class="form-control" 
+                           id="tagsId" 
+                           type="text"
+                           placeholder="Search keywords separated by commas"
+                           minlength="3"
+                           [(ngModel)]="newTags"
+                           name="tags"
+                           #tagVar="ngModel" />
+                    <span class="help-block" *ngIf="(tagVar.touched ||
+                                                     tagVar.dirty || quiz.id !== 0) &&
+                                                     tagVar.errors">
+                        <span *ngIf="tagVar.errors.minlength">
+                            The search tag must be at least 3 characters in length.
+                        </span>
+                    </span>
+                </div>
+                <div class="col-md-1">
+                    <button type="button"
+                            class="btn btn-default"
+                            (click)="addTags()">
+                        Add
+                    </button>
+                </div>
+            </div>
+            <div class="row col-md-8 col-md-offset-2">
+                <span *ngFor="let tag of quiz.tags; let i = index">
+                    <button class="btn btn-default"
+                            style="font-size:smaller;margin-bottom:12px"
+                            (click)="removeTag(i)">
+                        {{tag}}
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </span>
+            </div>
+            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+        </fieldset>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "../Scripts/",
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "moduleResolution": "node",
+	  "typeRoots": [
+        "./node_modules/@types",
+        "./node_modules"
+      ],
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ]
+
+  },
+  "exclude": [
+    "node_modules",
+    "typings",
+    "node_modules/core-js"
+  ],
+  "include": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ]
+}

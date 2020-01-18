@@ -1,0 +1,82 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" (click)="cancel()" aria-hidden="true">×</button>
+    <h3 class="modal-title">Enter question details</h3>
+</div>
+<div class="modal-body">
+    <form name="questionForm" class="form-horizontal" novalidate #questionForm="ngForm">
+        <fieldset>
+            <!-- Title -->
+            <div class="form-group">
+                <label for="title" class="col-md-2 control-label">Question</label>
+                <div class="col-md-10">
+                    <textarea [(ngModel)] = question.title
+                              id="title"
+                              class="form-control" name="title" placeholder="Enter the question"
+                              required minlength="5"
+                              (focus)="titleFocus=true" (blur)="titleFocus=false"
+                              #titleVar="ngModel"></textarea>
+                    <div *ngIf="(titleVar.touched ||titleVar.dirty || question.id !== 0) && titleVar.errors"
+                         class="alert alert-info">
+                        <p>Enter a question of at least 5 characters.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Answers -->
+            <div *ngFor="let answer of question.answers; let i = index" class="form-group">
+                <label for="answerText{{i}}"
+                       (click)="markCorrect(i)"
+                       class="col-md-2 control-label answer-mark"
+                       [ngClass]="{correct: answer.isCorrect}">
+                    <i class="fa fa-check" *ngIf="answer.isCorrect"></i>
+                    <a href [innerHTML]="letters[i]">
+                    </a>
+                </label>
+                <div name="answerForm" class="col-md-10" >
+                    <div class="input-group" >
+                        <input type="text"
+                                [(ngModel)]="answer.text"
+                                id="answerText{{i}}"
+                               class="form-control answer-field" name="answerText{{i}}" placeholder="Answer"
+                               required minlength="2"
+                               (focus)="answer.focus=true" (blur)="answer.focus=false"
+                               #answerTextVar="ngModel"
+                               >
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" (click)="removeAnswer(i)"
+                                    arial-label="Remove">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </span>
+                    </div>
+                    <div *ngIf="(answerTextVar.touched || answerTextVar.dirty || question.id !== 0) && answerTextVar.errors"
+                         class="alert alert-info">
+                        <p *ngIf="answerTextVar.errors.minlength">Enter an answer of at least 2 characters</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Answer Button -->
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-2">
+                    <span uib-popover="Please, assign at least 2 answers and mark the correct answer!"
+                          popover-trigger="none"
+                          popover-is-open="!saveIsAvailable(questionForm)"
+                          popover-placement="right">
+                        <button class="btn btn-info"
+                                [disabled]="!questionForm.form.valid"
+                                (click)="addAnswer()">
+                            Add Answer
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-danger" (click)="cancel()">Close</button>
+    <button class="btn btn-success"
+            (click)="ok()"
+            [disabled]="saveIsAvailable(questionForm)">
+        Save Question
+    </button>
+</div>

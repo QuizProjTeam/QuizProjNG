@@ -1,0 +1,140 @@
+﻿// ======== Imports =============
+@import "../helpers/index";
+
+.bb-custom-wrapper {
+    .bb-bookblock {
+
+        .bb-item {
+            .box-shadow(@x: 0; @y: 0px; @blur: 8px; @color: @shadow);
+            height: auto;
+
+            &::before, &::after {
+                z-index: -1;
+                position: absolute;
+                content: "";
+                bottom: 20px;
+                left: 8px;
+                width: 50%;
+                top: 70%;
+                background: @shadow;
+                .box-shadow(@x: 0; @y: 30px; @blur: 10px);
+                .transform(@property: skewY; @value: 175deg)
+            }
+
+            &::after {
+                .transform(@property: skewY; @value: 5deg);
+                right: 8px;
+                left: auto;
+            }
+        }
+
+        .quiz-question {
+
+
+            .slide-title {
+                z-index: 10;
+                position: relative;
+                width: 100%;
+                max-height: 8rem;
+                margin: 0;
+                text-align: center;
+                color: @layout-headings-links;
+                border-left: 1px solid #fff;
+                padding: 1.5rem 1rem;
+                .linear-grad(@colors: @shadow, #1F272F 90%; @dir: 90deg);
+
+                &::before, &::after {
+                    z-index: 5;
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 1px;
+                    .linear-grad(@colors: transparent, rgba(255, 255, 255, 0.5); @dir: right);
+                }
+
+                &::before {
+                    top: 0;
+                    width: 100%;
+                    .linear-grad(@colors: transparent, rgba(255, 255, 255, 0.5); @dir: right);
+                }
+
+                &::after {
+                    right: 0;
+                    bottom: 0;
+                }
+            }
+
+            .paper {
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    width: 0px;
+                    top: 0;
+                    left: 4.5rem;
+                    bottom: 0;
+                    border-left: 1px solid #F8D3D3;
+                }
+            }
+
+            .answers {
+                font-family: @font-droid;
+                position: relative;
+                width: 98%;
+                margin: 0.5rem auto;
+                font-size: 2rem;
+                list-style: none;
+                font-size: 2rem;
+                list-style: none;
+
+                .answer {
+                    display: list-item;
+                    padding-left: 5rem;
+                    cursor: pointer;
+                    background-color: white;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+                    color: #333;
+                    font-family: @font-thin;
+                    .linear-grad(@colors: transparent, rgba(255, 255, 255, 0.5); @dir: top);
+                    position: relative;
+
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 4.5rem;
+                        bottom: 0;
+                        border-left: 1px solid #F8D3D3;
+                    }
+
+                    & span.selected {
+                        text-decoration: underline;
+
+                        &:before {
+                            font: normal normal normal 24px/1 FontAwesome;
+                            color: #0B9900;
+                            content: "\f00c ";
+                            position: absolute;
+                            left: 1rem;
+                            top: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 660px) {
+    .bb-bookblock {
+        width: 98% !important;
+    }
+}
+
+@media (min-width: 661px) {
+    .bb-bookblock {
+        width: 71% !important;
+    }
+}

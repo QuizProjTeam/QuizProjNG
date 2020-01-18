@@ -1,0 +1,169 @@
+<div class="panel-body">
+    <form class="form-horizontal"
+          novalidate
+          #quizForm="ngForm">
+        <fieldset>
+            <legend>Basic Quiz Information</legend>
+            <div class="form-group" 
+                    [ngClass]="{'has-error': (titleVar.touched || 
+                                              titleVar.dirty || quiz.id !== 0) && 
+                                              !titleVar.valid }">
+                <label class="col-md-2 control-label" 
+                        for="titleId">Quiz Name</label>
+                <!--Title-->
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="titleId" 
+                            type="text" 
+                            placeholder="Name (required)"
+                            required
+                            minlength="3"
+                            [(ngModel)] = quiz.title
+                            name="title"
+                            #titleVar="ngModel" />
+                    <span class="help-block" *ngIf="(titleVar.touched ||
+                                                     titleVar.dirty || quiz.id !== 0) &&
+                                                     titleVar.errors">
+                        <span *ngIf="titleVar.errors.required">
+                            Quiz name is required.
+                        </span>
+                        <span *ngIf="titleVar.errors.minlength">
+                            Quiz name must be at least three characters.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            
+            
+            <!--<div class="form-group" 
+                    [ngClass]="{'has-error': (quizCodeVar.touched || 
+                                              quizCodeVar.dirty || quiz.id !== 0) && 
+                                              !quizCodeVar.valid }">
+                <label class="col-md-2 control-label" for="quizCodeId">Quiz Code</label>
+
+                <div class="col-md-8">
+                    <input class="form-control" 
+                            id="quizCodeId" 
+                            type="text" 
+                            placeholder="Code (required)"
+                            required
+                            [(ngModel)] = quiz.quizCode
+                            name="quizCode"
+                            #quizCodeVar="ngModel" />
+                    <span class="help-block" *ngIf="(quizCodeVar.touched ||
+                                                     quizCodeVar.dirty || quiz.id !== 0) &&
+                                                     quizCodeVar.errors">
+                        <span *ngIf="quizCodeVar.errors.required">
+                            Quiz code is required.
+                        </span>
+                    </span>
+                </div>
+            </div>-->
+
+            <!--Description-->
+            
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="descriptionId">Description</label>
+
+                <div class="col-md-8">
+                    <textarea class="form-control" 
+                            id="description" 
+                            placeholder="Description"
+                            required
+                            minlength="3"
+                            rows=3
+                            [(ngModel)] = quiz.description
+                            name="description"
+                              #descVar="ngModel"></textarea>
+
+                    <span class="help-block" *ngIf="(descVar.touched ||descVar.dirty || quiz.id !== 0) && descVar.errors"
+                         >
+                        <span *ngIf="descVar.errors.required">
+                            Quiz name is required.
+                        </span>
+                        <span *ngIf="descVar.errors.minlength">
+                            Write a short description for the quiz.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            
+            <!-- Private/Public -->
+            <div class="form-group">
+                <label for="access" class="col-lg-2 control-label">Quiz Access</label>
+                <div class="btn-group">
+                    <label class="btn btn-primary" [class.active]="quiz.isPrivate">
+                        <input type="checkbox" [(ngModel)]="quiz.isPrivate" name="isPrivate"> Private
+                    </label>
+                    <!--<label class="btn btn-primary">
+                        <input type="radio" NgbRadio [value]="false"> Public
+                    </label>-->
+                    <!--<label class="btn btn-primary">
+                        <input type="radio" [value]="false"> Right
+                    </label>-->
+                </div>
+                
+            </div>
+
+            <!-- Answers Shuffle -->
+            <div class="form-group">
+                <label for="suffle" class="col-lg-2 control-label">Shuffle Answers</label>
+                <label class="btn btn-primary" [class.active]="quiz.shuffleAnswers">
+                    <input type="checkbox" [(ngModel)]="quiz.shuffleAnswers" name="shuffleAnswers"> Shuffle
+                </label>
+                <!--<input type="radio" name="shuffleAnswers" [(ngModel)]="quiz.shuffleAnswers" [value]="true">
+                <input type="radio" name="shuffleAnswers" [(ngModel)]="quiz.shuffleAnswers" [value]="false">-->
+                <!--<div [(ngModel)]="quiz.shuffleAnswers" ngbRadioGroup name="shuffleAnswers">
+                    <label class="btn btn-primary">
+                        <input type="radio" [value]="true"> Shuffle
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" [value]="false"> Off
+                    </label>
+                </div>-->
+            </div>
+
+            <!-- Number Of Questions -->
+            <!--{{quiz.questions.length}}-->
+            <div class="form-group">
+                <label for="quizQuestionsCount" class="col-lg-2 control-label">Questions per Solving</label>
+                <div class="col-lg-2">
+                    <input type="number" [(ngModel)]="quiz.numberOfQuestions"
+                           id="quizQuestionsCount"
+                           class="form-control" 
+                           name="quizQuestionsCount"
+                           required min="3" max="10"
+                           (focus)="questionsCountFocus=true"
+                           (blur)="questionsCountFocus=false">
+                </div>
+            </div>
+
+            <button class="btn btn-lg btn-outline-primary" (click)="addQuestion()" [disabled]="numOfQxMatch()">Add Question</button>
+
+            <!-- Add Question -->
+            <div class="form-group">
+                <!--due to the ngbd-model needs Bootstrap 4 alpha 6 and to the fact that the new version will break up 
+                    current project style , we don't want to use it now-->
+                <!--<ngbd-modal-basic></ngbd-modal-basic>-->
+                <add-question *ngIf="showEditQuestion" [quiz]="quiz" [question]="question" (cancelEditQuestion) ="handleCancelEditQuestion($event)"></add-question>
+                <!--<div class="col-lg-10 col-lg-offset-2">
+                    <span uib-popover="{{ctrl.popups.ADD_QUESTIONS}}"
+                          popover-trigger="none"
+                          popover-is-open="quiz.questions.length < 3 && !modalIsOpen"
+                          popover-placement="right">
+                        <button class="btn btn-success" type="button"
+                                ng-click="ctrl.openQuesitonMenu()">
+                            Add New Question
+                        </button>
+                    </span>
+                </div>-->
+            </div>
+
+            <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+        </fieldset>
+    </form>
+
+    <question-list [quiz]="quiz" (openEditQuestion)="handleOpenEditQuestion($event)" (deleteQuestion)="handleDeleteQuestion($event)"></question-list>
+</div>

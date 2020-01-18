@@ -1,0 +1,64 @@
+[
+    {
+    "id": -2,
+    "forQuizId": 3,
+    "byUserId": 14,
+    "selectedAnswers":[
+        {
+            "id": 24,
+            "text": "22",
+            "isCorrect": false
+        },
+
+        {
+            "id": 25,
+            "text": "33",
+            "isCorrect": false
+        },
+
+        {
+            "id": 28,
+            "text": "66",
+            "isCorrect": true
+        },
+
+        {
+            "id": 29,
+            "text": "77",
+            "isCorrect": false
+        }, 
+
+        {
+            "id": 32,
+            "text": "ff",
+            "isCorrect": false
+        }
+    ]
+},
+
+{
+    "id": -1,
+    "forQuizId": 5,
+    "byUserId": 14,
+    "selectedAnswers":[
+        {
+            "id": 34,
+            "text": "bb",
+            "isCorrect": false
+        },
+
+        {
+            "id": 36,
+            "text": "dd",
+            "isCorrect": false
+        },
+
+        {
+            "id": 37,
+            "text": "ee",
+            "isCorrect": false
+        }
+    ]
+} 
+
+]

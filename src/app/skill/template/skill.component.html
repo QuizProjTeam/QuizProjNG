@@ -1,0 +1,15 @@
+﻿<article>
+    <div *ngIf="skill">
+        <h4>{{skill.name}} details</h4>
+        <div>
+            <label for="nametext">Name</label>
+            <input type="text" id="nametext" [(ngModel)]="skill.name" />
+        </div>
+        <div>
+            <label for="typetext">Type</label>
+            <input type="text" id="typetext" [(ngModel)]="skill.side" />
+        </div>
+        <button [routerLink]="['/skills']">Skill List</button>
+        <!--<router-outlet></router-outlet>-->
+    </div>
+</article>

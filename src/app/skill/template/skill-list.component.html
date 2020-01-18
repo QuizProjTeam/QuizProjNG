@@ -1,0 +1,15 @@
+﻿
+<article>
+    <h4>My Skills</h4>
+    <ul class="skills">
+        <li *ngFor="let skill of skills | async">
+            <a href="" [routerLink]="['/skills', skill.id]">
+                {{skill.id}}. {{skill.name}}
+            </a>
+        </li>
+    </ul>
+    
+
+</article>
+
+<router-outlet></router-outlet>

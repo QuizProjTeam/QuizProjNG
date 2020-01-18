@@ -1,0 +1,13 @@
+﻿.skills {
+  list-style-type: none;
+}
+
+*.skills li {
+  padding: 4px;
+  cursor: pointer;
+}
+
+*.skills li .selected {
+    background-color: #ccc;
+    width: 250px;
+}

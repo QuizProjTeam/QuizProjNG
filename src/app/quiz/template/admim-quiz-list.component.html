@@ -1,0 +1,17 @@
+﻿<article>
+    <h4>Quiz List</h4>
+    <ul class="quizs" >
+        <li *ngFor="let quiz of quizs" >
+                {{quiz.id}}. {{quiz.title}} ({{quiz.description}})
+            <a class="btn btn-primary" href="" [routerLink]="['/quizs', quiz.id, 'edit']">Edit</a>
+            <a class="btn btn-primary" href="" [routerLink]="['/quizs', quiz.id, 'solve']">Solve</a>
+            <!--<button class="btn btn-primary" (click) ="quizClick(quiz)">Edit</button>-->
+        </li>
+    </ul>
+</article>
+
+<article >
+
+    <edit-quiz (savedQuiz)="handleSavedQuiz($event)"></edit-quiz>
+    
+</article>

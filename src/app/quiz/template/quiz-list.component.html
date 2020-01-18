@@ -1,0 +1,20 @@
+﻿<article>
+    <h4>Quiz List from quiz-list.component.html</h4>
+    <ul class="quizs" >
+        <li *ngFor="let quiz of quizs" >
+            <a href="" [routerLink]="['/quizs', quiz.id]">
+                {{quiz.id}}. {{quiz.title}} ({{quiz.description}})
+            </a>
+            <a class="btn btn-primary" href="" [routerLink]="['/quizs', quiz.id, 'edit']">Edit</a>
+            <a class="btn btn-primary" href="" [routerLink]="['/quizs', quiz.id]">Solve</a>
+            
+        </li>
+    </ul>
+</article>
+
+<article >
+    <!--<edit-quiz (savedQuiz)="handleSavedQuiz($event)"></edit-quiz>-->
+    <router-outlet (activated)="handleSavedQuiz($event)"></router-outlet>
+    <h2>without the activated attribute</h2>
+    <router-outlet></router-outlet>
+</article>
